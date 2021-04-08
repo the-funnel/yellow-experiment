@@ -1,5 +1,4 @@
 import * as React from "react";
-import { getDocument } from "reakit-utils/getDocument";
 import { sortBasedOnDOMPosition } from "./sortBasedOnDOMPosition";
 import { Item } from "./types";
 
@@ -10,19 +9,6 @@ function setItemsBasedOnDOMPosition(items: Item[], setItems: SetItems) {
   if (items !== sortedItems) {
     setItems(sortedItems);
   }
-}
-
-function getCommonParent(items: Item[]) {
-  const [firstItem, ...nextItems] = items;
-  let parentElement = firstItem?.ref.current?.parentElement;
-  while (parentElement) {
-    const parent = parentElement;
-    if (nextItems.every((item) => parent.contains(item.ref.current))) {
-      return parentElement;
-    }
-    parentElement = parentElement.parentElement;
-  }
-  return getDocument(parentElement).body;
 }
 
 // istanbul ignore next: JSDOM doesn't support IntersectionObverser
@@ -39,8 +25,9 @@ function useIntersectionObserver(items: Item[], setItems: SetItems) {
       }
       previousItems.current = items;
     };
-    const root = getCommonParent(items);
-    const observer = new IntersectionObserver(callback, { root });
+    const observer = new IntersectionObserver(callback, {
+      root: document.body,
+    });
     for (const item of items) {
       if (item.ref.current) {
         observer.observe(item.ref.current);

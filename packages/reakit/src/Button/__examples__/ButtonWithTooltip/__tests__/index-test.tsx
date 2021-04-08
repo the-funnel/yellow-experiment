@@ -32,7 +32,7 @@ test("markup", () => {
           hidden=""
           id="id-1"
           role="tooltip"
-          style="display: none; position: fixed; left: 100%; top: 100%; pointer-events: none;"
+          style="display: none; pointer-events: none;"
         >
           Tooltip
         </div>
