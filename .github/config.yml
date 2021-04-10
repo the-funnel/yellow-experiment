@@ -7,16 +7,16 @@ requestInfoReplyComment: >
 
 # Configuration for metabot
 metabotLabels:
-  - warning:
-      - "request-info"
-
   - info:
-      - "todo"
-      - "codecov"
-
-  - deployment:
-      - "codesandbox"
       - "github-actions"
+      - "request-info"
+    
+  - deploy:
+      - "codesandbox"
+  
+  - critical:
+      - "codecov"
+      - "todo"
 
 metabotBotsToWaitForComment:
   - "github-actions"
