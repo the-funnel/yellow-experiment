@@ -135,6 +135,7 @@ export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
         if (onChangeRef.current) {
           // If component is NOT rendered as a native input, it will not have
           // the `checked` property. So we assign it for consistency.
+          // check this If condition
           if (!isNativeCheckbox) {
             element.checked = !element.checked;
           }
